@@ -8,6 +8,7 @@ namespace CoreLayer.WebDriver
     {
         private static readonly WebDriverFactory _instance = new();
         public static WebDriverFactory Instance => _instance;
+
         private WebDriverFactory(){}
 
         public IWebDriver CreateWebDriver(BrowserType browserType)
