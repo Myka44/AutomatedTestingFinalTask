@@ -17,7 +17,6 @@ namespace CoreLayer.WebDriver
         public void StartBrowser()
         {
             _driver.Manage().Window.Maximize();
-            _driver.Manage().Timeouts().ImplicitWait = _timeout;
         }
 
         public void Quit()
