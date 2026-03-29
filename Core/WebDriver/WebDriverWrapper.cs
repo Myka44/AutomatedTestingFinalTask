@@ -61,7 +61,6 @@ namespace CoreLayer.WebDriver
             return FindElement(by, _timeout);
         }
 
-
         /// <summary>
         /// This method will throw an exception if the element is not found in DOM or displayed within timeout otherwise it will always return a non null displayed element
         /// </summary>

@@ -44,7 +44,6 @@ namespace Business.PageObjects
         public bool IsInventoryItemsDisplayed()
         {
             return _driver.FindElements(_inventoryItems).Count > 0;
-
         }
     }
 }
