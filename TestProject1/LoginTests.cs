@@ -32,7 +32,7 @@ namespace TestProject1
         public void TearDown()
         {
             TestContext.Out.WriteLine($"TearDown: closing {_browserType} after test: {TestContext.CurrentContext.Test.Name}");
-            _driverWrapper.CloseBrowser();
+            _driverWrapper.Quit();
         }
 
         [Test]

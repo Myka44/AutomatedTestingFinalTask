@@ -20,10 +20,9 @@ namespace CoreLayer.WebDriver
             _driver.Manage().Timeouts().ImplicitWait = _timeout;
         }
 
-        public void CloseBrowser()
+        public void Quit()
         {
             _driver.Quit();
-            _driver.Dispose();
         }
 
         public void NavigateToUrl(string url)

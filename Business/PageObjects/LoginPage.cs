@@ -20,7 +20,7 @@ namespace Business.PageObjects
 
         public LoginPage(WebdriverWrapper driver)
         {
-            this._driver = driver ?? throw new ArgumentNullException(nameof(driver));
+            _driver = driver ?? throw new ArgumentNullException(nameof(driver));
         }
 
         public LoginPage Open()
