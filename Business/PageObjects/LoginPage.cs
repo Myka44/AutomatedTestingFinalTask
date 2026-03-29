@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 
 namespace Business.PageObjects
 {
-    //Page object class for the login page
     public class LoginPage
     {
-        private static string Url { get; } = "https://www.saucedemo.com/";
+        private const string Url = "https://www.saucedemo.com/";
         private readonly WebdriverWrapper _driver;
         private readonly By _userNameLocator = By.CssSelector("[data-test='username']");
         private readonly By _passwordLocator = By.CssSelector("[data-test='password']");

@@ -61,7 +61,7 @@ namespace TestProject1
         {
             //Given
             TestContext.Out.WriteLine($"Test: TestLoginWithOnlyUsername on {_browserType}");
-            var loginPage = new LoginPage(_driverWrapper!);
+            var loginPage = new LoginPage(_driverWrapper);
             loginPage.Open();
 
             //When
@@ -82,8 +82,8 @@ namespace TestProject1
         public void TestLoginWithValidCredentials(string username, string password)
         {
             //Given
-            TestContext.Out.WriteLine($"Test: TestLoginWithValidCredentials on {_browserType}, useranme: {username} ");
-            var loginPage = new LoginPage(_driverWrapper!);
+            TestContext.Out.WriteLine($"Test: TestLoginWithValidCredentials on {_browserType}, username: {username}, password {password}");
+            var loginPage = new LoginPage(_driverWrapper);
             loginPage.Open();
 
             //When

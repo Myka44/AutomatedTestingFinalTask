@@ -17,11 +17,13 @@ namespace CoreLayer.WebDriver
         public void StartBrowser()
         {
             _driver.Manage().Window.Maximize();
+            _driver.Manage().Timeouts().ImplicitWait = _timeout;
         }
 
         public void CloseBrowser()
         {
             _driver.Quit();
+            _driver.Dispose();
         }
 
         public void NavigateToUrl(string url)
@@ -40,7 +42,7 @@ namespace CoreLayer.WebDriver
             element.Clear();
             element.SendKeys(text);
         }
-
+        
         public void ClearText(By by)
         {
             var element = FindElement(by, _timeout);
@@ -59,7 +61,13 @@ namespace CoreLayer.WebDriver
             return FindElement(by, _timeout);
         }
 
-        //This method will thrw an exception if the element is not found in DOM or displayed otherwise it will always return a non null element
+
+        /// <summary>
+        /// This method will throw an exception if the element is not found in DOM or displayed within timeout otherwise it will always return a non null displayed element
+        /// </summary>
+        /// <param name="by">element locator</param>
+        /// <param name="timeout">wait timeout</param>
+        /// <returns>displayed element</returns>
         public IWebElement FindElement(By by, TimeSpan timeout)
         {
             var wait = new WebDriverWait(_driver, timeout);

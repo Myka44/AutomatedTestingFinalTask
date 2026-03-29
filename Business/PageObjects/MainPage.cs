@@ -3,7 +3,6 @@ using OpenQA.Selenium;
 
 namespace Business.PageObjects
 {
-    //Page object class for the main page
     public class MainPage
     {
         private readonly WebdriverWrapper _driver;
