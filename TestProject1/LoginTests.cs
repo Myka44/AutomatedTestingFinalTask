@@ -1,7 +1,6 @@
 using Business.PageObjects;
 using CoreLayer.WebDriver;
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace TestProject1
 {
@@ -11,7 +10,7 @@ namespace TestProject1
     [FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
     public class LoginTests
     {
-        private WebdriverWrapper _driverWrapper;
+        private WebDriverWrapper _driverWrapper;
         private readonly BrowserType _browserType;
         private static readonly TimeSpan TestTimeout = TimeSpan.FromSeconds(15);
 
@@ -24,7 +23,7 @@ namespace TestProject1
         public void SetUp()
         {
             TestContext.Out.WriteLine($"SetUp: browser: {_browserType} for test: {TestContext.CurrentContext.Test.Name}");
-            _driverWrapper = new WebdriverWrapper(_browserType, TestTimeout);
+            _driverWrapper = new WebDriverWrapper(_browserType, TestTimeout);
             _driverWrapper.StartBrowser();
         }
 

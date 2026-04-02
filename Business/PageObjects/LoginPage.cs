@@ -1,24 +1,19 @@
 
 using CoreLayer.WebDriver;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.PageObjects
 {
     public class LoginPage
     {
         private const string Url = "https://www.saucedemo.com/";
-        private readonly WebdriverWrapper _driver;
+        private readonly WebDriverWrapper _driver;
         private readonly By _userNameLocator = By.CssSelector("[data-test='username']");
         private readonly By _passwordLocator = By.CssSelector("[data-test='password']");
         private readonly By _loginButtonLocator = By.CssSelector("[data-test='login-button']");
         private readonly By _errorMessageLocator = By.CssSelector("[data-test='error']");
 
-        public LoginPage(WebdriverWrapper driver)
+        public LoginPage(WebDriverWrapper driver)
         {
             _driver = driver ?? throw new ArgumentNullException(nameof(driver));
         }
@@ -69,14 +64,7 @@ namespace Business.PageObjects
 
         public string GetErrorMessage()
         {
-            try
-            {
-                return _driver.FindElement(_errorMessageLocator).Text;
-            }
-            catch (WebDriverTimeoutException)
-            {
-                return string.Empty;
-            }
+            return _driver.TryFindElement(_errorMessageLocator)?.Text ?? "";
         }
     }
 }

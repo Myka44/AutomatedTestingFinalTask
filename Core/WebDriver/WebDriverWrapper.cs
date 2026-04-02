@@ -3,12 +3,12 @@ using OpenQA.Selenium.Support.UI;
 
 namespace CoreLayer.WebDriver
 {
-    public class WebdriverWrapper
+    public class WebDriverWrapper
     {
         private readonly IWebDriver _driver;
         private readonly TimeSpan _timeout;
 
-        public WebdriverWrapper(BrowserType browserType, TimeSpan timeout)
+        public WebDriverWrapper(BrowserType browserType, TimeSpan timeout)
         {
             _driver = WebDriverFactory.Instance.CreateWebDriver(browserType);
             _timeout = timeout;
@@ -31,7 +31,7 @@ namespace CoreLayer.WebDriver
 
         public void Click(By by)
         {
-            FindElement(by, _timeout).Click();
+            FindElement(by, _timeout)?.Click();
         }
 
         public void EnterText(By by, string text)
@@ -85,7 +85,36 @@ namespace CoreLayer.WebDriver
             }
             catch (WebDriverTimeoutException)
             {
-                throw new NoSuchElementException($"Element with locator: {by} was not found or displayed within {timeout.TotalSeconds} seconds");
+                throw new WebDriverTimeoutException($"Element with locator: {by} was not found or displayed within {timeout.TotalSeconds} seconds");
+            }
+        }
+
+        public IWebElement? TryFindElement(By by)
+        {
+            return TryFindElement(by, _timeout);
+        }
+
+        public IWebElement? TryFindElement(By by, TimeSpan timeout)
+        {
+            var wait = new WebDriverWait(_driver, timeout);
+            try
+            {
+                return wait.Until(drv =>
+                {
+                    try
+                    {
+                        var element = drv.FindElement(by);
+                        return element.Displayed ? element : null;
+                    }
+                    catch (NoSuchElementException)
+                    {
+                        return null;
+                    }
+                });
+            }
+            catch (WebDriverTimeoutException)
+            {
+                return null;
             }
         }
     }
